@@ -2,7 +2,7 @@
     "name": "witx",
     "displayName": "witx",
     "description": "WebAssembly Interface Types support",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "jedisct1",
     "author": {
         "name": "Frank Denis"

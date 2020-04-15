@@ -65,7 +65,12 @@
 						"1": {
 							"name": "keyword.other"
 						}
-					}
+					},
+					"patterns": [
+						{
+							"include": "#types"
+						}
+					]
 				},
 				{
 					"include": "#types_and_stuff"
@@ -231,6 +236,18 @@
 							"include": "#inside_module_definitions"
 						}
 					]
+				},
+				{
+					"begin": "\\s*\\(\\s*(use)\\s*(\".+?\")",
+					"end": "\\)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.other"
+						},
+						"2": {
+							"name": "string.quoted.double.witx"
+						}
+					}
 				}
 			]
 		}
