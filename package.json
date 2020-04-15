@@ -3,6 +3,14 @@
     "displayName": "witx",
     "description": "WebAssembly Interface Types support",
     "version": "0.0.1",
+    "publisher": "jedisct1",
+    "author": {
+        "name": "Frank Denis"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jedisct1/vscode-witx.git"
+    },
     "engines": {
         "vscode": "^1.44.0"
     },
@@ -10,16 +18,25 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "witx",
-            "aliases": ["witx", "witx"],
-            "extensions": [".witx"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "witx",
-            "scopeName": "source.witx",
-            "path": "./syntaxes/witx.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "witx",
+                "aliases": [
+                    "witx",
+                    "witx"
+                ],
+                "extensions": [
+                    ".witx"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "witx",
+                "scopeName": "source.witx",
+                "path": "./syntaxes/witx.tmLanguage.json"
+            }
+        ]
     }
 }
