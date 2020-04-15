@@ -11,7 +11,7 @@
 			"patterns": [
 				{
 					"comment": "Comments",
-					"match": ";;;.*",
+					"match": ";;.*",
 					"name": "comment.line.double-slash.witx"
 				}
 			]
@@ -19,9 +19,7 @@
 		"types_and_stuff": {
 			"patterns": [
 				{
-					"comment": "Comments",
-					"match": ";;.*",
-					"name": "comment.line.double-slash.witx"
+					"include": "#comments"
 				},
 				{
 					"comment": "Types",
