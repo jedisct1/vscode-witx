@@ -1,0 +1,25 @@
+{
+    "name": "witx",
+    "displayName": "witx",
+    "description": "WebAssembly Interface Types support",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.44.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "witx",
+            "aliases": ["witx", "witx"],
+            "extensions": [".witx"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "witx",
+            "scopeName": "source.witx",
+            "path": "./syntaxes/witx.tmLanguage.json"
+        }]
+    }
+}

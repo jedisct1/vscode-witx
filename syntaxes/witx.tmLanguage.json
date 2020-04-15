@@ -1,0 +1,74 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "witx",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#variables"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.other.witx",
+					"match": "\\b(const|typename|export|array|module|import|param|result)\\b"
+				},
+				{
+					"name": "keyword.other.witx",
+					"match": "@interface\\s+func\\b"
+				},
+				{
+					"name": "entity.name.type.builtins.witx",
+					"match": "@witx\\s+.+?\\b"
+				},
+				{
+					"name": "entity.name.type.witx",
+					"match": "\\b(union|enum|handle|string|u8|u16|u32|u64|i8|u16|u32|u64|int|uint|array|memory)\\b"
+				},
+				{
+					"name": "entity.storage.modifier.witx",
+					"match": "\\b(const_pointer|pointer)\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.witx",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.witx",
+					"match": "\\\\."
+				}
+			]
+		},
+		"comments": {
+			"name": "comment.line.double-column.witx",
+			"patterns": [
+				{
+					"name": "comment.line.double-column",
+					"match": ";;.*"
+				}
+			]
+		},
+		"variables": {
+			"name": "variable.parameter.witx",
+			"patterns": [
+				{
+					"name": "variable.witx",
+					"match": "\\$[a-zA-Z0-9_-]*"
+				}
+			]
+		}
+	},
+	"scopeName": "source.witx"
+}
