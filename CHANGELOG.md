@@ -2,6 +2,10 @@
 
 All notable changes to the "witx" extension will be documented in this file.
 
+## 0.0.3
+
+WITX syntax updated for version 0.10.
+
 ## 0.0.2
 
 Support nested (@witx) pointer types.
