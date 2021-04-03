@@ -28,17 +28,17 @@
 				},
 				{
 					"comment": "Native types",
-					"match": "\\b(char8|f32|f64|empty|handle|s16|s32|s64|s8|string|u16|u32|u64|u8|usize)\\b",
+					"match": "\\b(resource|bool|char|char8|f32|f64|empty|handle|s16|s32|s64|s8|string|u16|u32|u64|u8|usize)\\b",
 					"name": "support.type.witx"
 				},
 				{
 					"comment": "Modifiers",
-					"match": "\\b(array|int|const_pointer|pointer)\\b",
+					"match": "\\b(repr|array|int|const_pointer|pointer|noreturn)\\b",
 					"name": "storage.modifier.witx"
 				},
 				{
 					"comment": "Keywords",
-					"match": "\\b(export|func|import|memory|module|param|result|field|flags|noreturn|enum|struct|union|use|typename)\\b",
+					"match": "\\b(in_buffer|out_buffer|option|variant|tuple|record|list|case|from|export|func|import|memory|module|param|result|field|flags|enum|struct|union|use|typename)\\b",
 					"name": "keyword.other.witx"
 				},
 				{
