@@ -33,7 +33,7 @@
 				},
 				{
 					"comment": "Modifiers",
-					"match": "\\b(repr|array|int|const_pointer|pointer|noreturn)\\b",
+					"match": "\\b(repr|array|int|const_pointer|pointer|noreturn|expected|error)\\b",
 					"name": "storage.modifier.witx"
 				},
 				{
