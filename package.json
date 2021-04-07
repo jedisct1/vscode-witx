@@ -2,7 +2,7 @@
     "name": "witx",
     "displayName": "witx",
     "description": "WebAssembly Interface Types support",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "publisher": "jedisct1",
     "author": {
         "name": "Frank Denis"
@@ -26,7 +26,7 @@
                     "witx"
                 ],
                 "extensions": [
-                    "witx"
+                    ".witx"
                 ],
                 "configuration": "./language-configuration.json"
             }
