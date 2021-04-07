@@ -2,7 +2,7 @@
     "name": "witx",
     "displayName": "witx",
     "description": "WebAssembly Interface Types support",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "jedisct1",
     "author": {
         "name": "Frank Denis"
@@ -12,7 +12,7 @@
         "url": "https://github.com/jedisct1/vscode-witx.git"
     },
     "engines": {
-        "vscode": "^1.44.0"
+        "vscode": "^1.55.0"
     },
     "categories": [
         "Programming Languages"
@@ -26,7 +26,7 @@
                     "witx"
                 ],
                 "extensions": [
-                    ".witx"
+                    "witx"
                 ],
                 "configuration": "./language-configuration.json"
             }

@@ -1,254 +1,244 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "witx",
-	"patterns": [
-		{
-			"include": "#root"
-		}
-	],
-	"repository": {
-		"comments": {
-			"patterns": [
-				{
-					"comment": "Comments",
-					"match": ";;.*",
-					"name": "comment.line.double-slash.witx"
-				}
-			]
-		},
-		"types_and_stuff": {
-			"patterns": [
-				{
-					"include": "#comments"
-				},
-				{
-					"comment": "Types",
-					"match": "\\$[a-zA-Z0-9_]+[a-zA-Z0-9_-]*?",
-					"name": "storage.type.witx"
-				},
-				{
-					"comment": "Native types",
-					"match": "\\b(resource|bool|char|char8|f32|f64|empty|handle|s16|s32|s64|s8|string|u16|u32|u64|u8|usize)\\b",
-					"name": "support.type.witx"
-				},
-				{
-					"comment": "Modifiers",
-					"match": "\\b(repr|array|int|const_pointer|pointer|noreturn|expected|error)\\b",
-					"name": "storage.modifier.witx"
-				},
-				{
-					"comment": "Keywords",
-					"match": "\\b(in_buffer|out_buffer|option|variant|tuple|record|list|case|from|export|func|import|memory|module|param|result|field|flags|enum|struct|union|use|typename)\\b",
-					"name": "keyword.other.witx"
-				},
-				{
-					"comment": "Keywords",
-					"match": "\\bconst\\b",
-					"name": "storage.modifier.witx"
-				},
-				{
-					"comment": "Strings",
-					"begin": "\"",
-					"end": "\"",
-					"name": "string.quoted.double.witx"
-				}
-			]
-		},
-		"types": {
-			"patterns": [
-				{
-					"begin": "\\(\\s*(@witx)",
-					"end": "\\)",
-					"beginCaptures": {
-						"1": {
-							"name": "keyword.other"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#types"
-						}
-					]
-				},
-				{
-					"include": "#types_and_stuff"
-				}
-			]
-		},
-		"inside_type_definitions": {
-			"patterns": [
-				{
-					"include": "#comments"
-				},
-				{
-					"begin": "\\(",
-					"end": "\\)",
-					"name": "inside_inside_type_definitions",
-					"patterns": [
-						{
-							"include": "#comments"
-						},
-						{
-							"include": "#types"
-						},
-						{
-							"include": "#inside_inside_type_definitions"
-						}
-					]
-				}
-			]
-		},
-		"inside_module_definitions": {
-			"patterns": [
-				{
-					"include": "#comments"
-				},
-				{
-					"begin": "\\(\\s*(import)\\s*(\".+?\")\\s*\\(.+?\\)",
-					"end": "\\)",
-					"beginCaptures": {
-						"1": {
-							"name": "keyword.other"
-						},
-						"2": {
-							"name": "string.quoted.double.witx"
-						},
-						"3": {
-							"name": "storage.type"
-						}
-					},
-					"name": "inside_module_import",
-					"patterns": [
-						{
-							"include": "#comments"
-						},
-						{
-							"include": "#types_and_stuff"
-						}
-					]
-				},
-				{
-					"begin": "\\(\\s*(@interface)\\s*(func)\\s*\\(\\s*(export)\\s*(\".+?\")\\)",
-					"end": "\\)",
-					"beginCaptures": {
-						"1": {
-							"name": "keyword.other"
-						},
-						"2": {
-							"name": "keyword.other"
-						},
-						"3": {
-							"name": "storage.type"
-						},
-						"4": {
-							"name": "entity.name.function"
-						}
-					},
-					"name": "inside_module_import",
-					"patterns": [
-						{
-							"include": "#comments"
-						},
-						{
-							"include": "#types_and_stuff"
-						},
-						{
-							"begin": "\\(\\s*(param)\\s+(\\$.+?)\\s+",
-							"end": "\\)",
-							"beginCaptures": {
-								"1": {
-									"name": "keyword.other"
-								},
-								"2": {
-									"name": "variable.parameter"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#types"
-								}
-							]
-						},
-						{
-							"begin": "\\(\\s*(result)\\s+(\\$.+?)\\s+",
-							"end": "\\)",
-							"beginCaptures": {
-								"1": {
-									"name": "keyword.control"
-								},
-								"2": {
-									"name": "variable.parameter"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#types"
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		"root": {
-			"patterns": [
-				{
-					"include": "#comments"
-				},
-				{
-					"begin": "\\s*\\(\\s*(typename)\\s*(\\$\\w+)",
-					"end": "\\)",
-					"beginCaptures": {
-						"1": {
-							"name": "keyword.other"
-						},
-						"2": {
-							"name": "storage.type"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comments"
-						},
-						{
-							"include": "#inside_type_definitions"
-						}
-					]
-				},
-				{
-					"begin": "\\s*\\(\\s*(module)\\s*(\\$\\w+)",
-					"end": "\\)",
-					"beginCaptures": {
-						"1": {
-							"name": "keyword.other"
-						},
-						"2": {
-							"name": "support.constant.witx"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comments"
-						},
-						{
-							"include": "#inside_module_definitions"
-						}
-					]
-				},
-				{
-					"begin": "\\s*\\(\\s*(use)\\s*(\".+?\")",
-					"end": "\\)",
-					"beginCaptures": {
-						"1": {
-							"name": "keyword.other"
-						},
-						"2": {
-							"name": "string.quoted.double.witx"
-						}
-					}
-				}
-			]
-		}
-	},
-	"scopeName": "source.witx"
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "witx",
+  "scopeName": "source.witx",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#instructions"
+    },
+    {
+      "include": "#types"
+    },
+    {
+      "include": "#modules"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#invalid"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "comment": "Line comment",
+          "name": "comment.line.witx",
+          "match": "(;;).*$",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.comment.witx"
+            }
+          }
+        },
+        {
+          "comment": "Block comment",
+          "name": "comment.block.witx",
+          "begin": "\\(;",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.witx"
+            }
+          },
+          "end": ";\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.witx"
+            }
+          }
+        }
+      ]
+    },
+    "strings": {
+      "comment": "String literal",
+      "name": "string.quoted.double.witx",
+      "begin": "\"",
+      "end": "\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end"
+        }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.witx",
+          "match": "\\\\(n|t|\\\\|'|\"|[0-9a-fA-F]{2})"
+        }
+      ]
+    },
+    "instructions": {
+      "patterns": [
+        {
+          "comment": "Reference types",
+          "patterns": [
+            {
+              "comment": "Reference instruction [reference-types]",
+              "name": "keyword.operator.word.witx",
+              "match": "\\b(ref)\\.(?:null|is_null|func)\\b",
+              "captures": {
+                "1": {
+                  "name": "support.class.witx"
+                }
+              }
+            },
+            {
+              "comment": "Table instruction [reference-types]",
+              "name": "keyword.operator.word.witx",
+              "match": "\\b(table)\\.(?:get|size|grow|fill|init|copy)\\b",
+              "captures": {
+                "1": {
+                  "name": "support.class.witx"
+                }
+              }
+            },
+            {
+              "comment": "Type name [reference-types]",
+              "name": "entity.name.type.witx",
+              "match": "\\b(?:anyref|funcref|nullref)\\b"
+            }
+          ]
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "comment": "Reference types",
+          "patterns": [
+            {
+              "comment": "Type name [reference-types]",
+              "name": "entity.name.type.witx",
+              "match": "\\b(?:anyref|funcref|nullref)\\b(?!\\.)"
+            }
+          ]
+        },
+        {
+          "comment": "MVP",
+          "patterns": [
+            {
+              "comment": "Type name [mvp]",
+              "name": "entity.name.type.witx",
+              "match": "\\b(?:i32|i64|f32|f64)\\b(?!\\.)"
+            }
+          ]
+        }
+      ]
+    },
+    "modules": {
+      "patterns": [
+        {
+          "comment": "Bulk memory operations",
+          "patterns": [
+            {
+              "comment": "Passive modifier [bulk-memory-operations]",
+              "match": "(?<=\\(data)\\s+(passive)\\b",
+              "captures": {
+                "1": {
+                  "name": "storage.modifier.witx"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "comment": "MVP",
+          "patterns": [
+            {
+              "comment": "Module element [mvp]",
+              "name": "storage.type.witx",
+              "match": "(?<=\\()(?:module|import|export|memory|data|table|elem|start|func|type|param|result|global|local)\\b"
+            },
+            {
+              "comment": "Mutable global modifier [mvp]",
+              "name": "storage.modifier.witx",
+              "match": "(?<=\\()\\s*(mut)\\b",
+              "captures": {
+                "1": {
+                  "name": "storage.modifier.witx"
+                }
+              }
+            },
+            {
+              "comment": "Function name [mvp]",
+              "match": "(?<=\\(func|\\(start|call|return_call|ref\\.func)\\s+(\\$[0-9A-Za-z!#$%&'*+\\-./:<=>?@\\\\^_`|~]*)",
+              "captures": {
+                "1": {
+                  "name": "entity.name.function.witx"
+                }
+              }
+            },
+            {
+              "comment": "Function name(s) (elem) [mvp]",
+              "begin": "\\)\\s+(\\$[0-9A-Za-z!#$%&'*+\\-./:<=>?@\\\\^_`|~]*)",
+              "beginCaptures": {
+                "1": {
+                  "name": "entity.name.function.witx"
+                }
+              },
+              "end": "\\)",
+              "patterns": [
+                {
+                  "name": "entity.name.function.witx",
+                  "match": "(?<=\\s)\\$[0-9A-Za-z!#$%&'*+\\-./:<=>?@\\\\^_`|~]*"
+                }
+              ]
+            },
+            {
+              "comment": "Function type [mvp]",
+              "match": "(?<=\\(type)\\s+(\\$[0-9A-Za-z!#$%&'*+\\-./:<=>?@\\\\^_`|~]*)",
+              "captures": {
+                "1": {
+                  "name": "support.type.function.witx"
+                }
+              }
+            },
+            {
+              "comment": "Variable name or branch label [mvp]",
+              "name": "variable.other.witx",
+              "match": "\\$[0-9A-Za-z!#$%&'*+\\-./:<=>?@\\\\^_`|~]*\\b"
+            }
+          ]
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "comment": "MVP",
+          "patterns": [
+            {
+              "comment": "Floating point literal",
+              "name": "constant.numeric.float.witx",
+              "match": "\\b[0-9][0-9]*(?:\\.[0-9][0-9]*)?(?:[eE][+-]?[0-9]+)?\\b"
+            },
+            {
+              "comment": "Integer literal",
+              "name": "constant.numeric.integer.witx",
+              "match": "-?\\b(?:0x[0-9a-fA-F][0-9a-fA-F]*|\\d[\\d]*)\\b"
+            }
+          ]
+        }
+      ]
+    },
+    "invalid": {
+      "patterns": [
+        {
+          "name": "invalid.witx",
+          "match": "[^\\s()]+"
+        }
+      ]
+    }
+  }
 }
